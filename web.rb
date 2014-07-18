@@ -31,6 +31,6 @@ def send_message(msg)
 end
 
 def salute
-  send_message("\o")
+  send_message("\\o")
 end
 
