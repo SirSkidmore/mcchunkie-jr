@@ -1,6 +1,7 @@
 require 'sinatra'
 require 'json'
 require 'net/http'
+require 'open-uri'
 
 set :server, "thin"
 
@@ -15,6 +16,8 @@ post '/' do
     salute(:left)
   elsif msg["text"].include?("\\o") && msg["name"] != "McChunkie"
     salute(:right)
+  elsif msg["text"].start_with?("!weather") && msg["name"] != "McChunkie"
+    weather_report("Auburn, IN")
   end
 end
 
@@ -40,3 +43,15 @@ def salute(direction)
   end
 end
 
+def weather_report(location)
+  open('http://api.wunderground.com/api/3364b700f9c31c96/conditions/q/IN/Auburn.json') do |f|
+    json_string = f.read
+    parsed_json = JSON.parse(json_string)
+    forecast = parsed_json['current_observation']
+    location = forecast['display_location']['full']
+    conditions = forecast['weather']
+    temp = forecast['temperature_string']
+
+    send_message("The current conditions in #{location} are #{conditions} with a temperature of #{temp}.")
+  end
+end
