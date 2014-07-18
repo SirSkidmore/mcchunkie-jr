@@ -11,7 +11,7 @@ end
 post '/' do
   msg = JSON.parse(request.body.read || '{"text": "something is super broke}')
   puts msg["text"]
-  repeat(msg["text"])
+  # repeat(msg["text"])
 end
 
 def repeat(msg)
