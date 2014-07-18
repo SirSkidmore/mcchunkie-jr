@@ -8,7 +8,7 @@ end
 
 post '/' do
   msg = JSON.parse(params)
-  repeat(msg)
+  puts msg.text
 end
 
 def repeat(msg)
