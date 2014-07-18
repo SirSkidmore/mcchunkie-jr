@@ -11,9 +11,9 @@ end
 post '/' do
   msg = JSON.parse(request.body.read || '{"text": "something is super broke}')
   puts msg["text"]
-  if msg["text"].include?("o/")
+  if msg["text"].include?("o/") && msg["name"] != "McChunkie"
     salute(:left)
-  elsif msg["text"].include?("\o")
+  elsif msg["text"].include?("\\o") && msg["name"] != "McChunkie"
     salute(:right)
   end
 end
