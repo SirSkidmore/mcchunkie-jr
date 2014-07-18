@@ -12,7 +12,9 @@ post '/' do
   msg = JSON.parse(request.body.read || '{"text": "something is super broke}')
   puts msg["text"]
   if msg["text"].include?("o/")
-    salute()
+    salute(:left)
+  elsif msg["text"].include?("\o")
+    salute(:right)
   end
 end
 
@@ -30,7 +32,11 @@ def send_message(msg)
   gm_http.request(req)
 end
 
-def salute
-  send_message("\\o")
+def salute(direction)
+  if direction == :left
+    send_message("\\o")
+  else
+    send_message("o/")
+  end
 end
 
