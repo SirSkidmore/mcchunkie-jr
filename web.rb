@@ -18,7 +18,7 @@ post '/' do
     salute(:right)
   elsif msg["text"].start_with?("!weather") && msg["name"] != "McChunkie"
     weather_report("Auburn, IN")
-  elsif msg["text"].match(/^\!beer/) && msg["name" != "McChunkie"]
+  elsif msg["text"].match(/^\!beer/) && msg["name"] != "McChunkie"
     # this could be better
     beer = msg["text"].split[1..-1].join(" ")
     brewdb(beer)
