@@ -22,7 +22,6 @@ post '/' do
     # this could be better
     beer = msg["text"].split[1..-1].join(" ")
     brewdb(beer)
-    put "beer command received..."
   end
 end
 
@@ -82,6 +81,7 @@ def brewdb(beer)
       send_message("""
 #{bname} - (#{byear} - #{bsite}) : #{name} (ABV: #{abv})  - #{desc}
 """)
+      puts "#{name} - #{abv}"
     else
       send_message("No beers found")
     end
