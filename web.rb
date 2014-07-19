@@ -19,6 +19,7 @@ post '/' do
   elsif msg["text"].start_with?("!weather") && msg["name"] != "McChunkie"
     weather_report("Auburn, IN")
   elsif msg["text"].match(/^\!beer/) && msg["name"] != "McChunkie"
+    puts "looking for beer..."
     # this could be better
     beer = msg["text"].split[1..-1].join(" ")
     brewdb(beer)
@@ -36,7 +37,8 @@ def send_message(msg)
   gm_http.use_ssl = true
   req = Net::HTTP::Post.new(uri.path, {'Content-Type' => 'application/json'})
   req.body = response_msg
-  gm_http.request(req)
+  response = gm_http.request(req)
+  puts response.message
 end
 
 def salute(direction)
@@ -77,10 +79,11 @@ def brewdb(beer)
       end
       name = beer_res["name"]
       abv = beer_res["abv"]
-      desc = beer_res["description"]
+      desc = beer_res["description"][0...447]
       send_message("""
-#{bname} - (#{byear} - #{bsite}) : #{name} (ABV: #{abv})  - #{desc}
+#{bname} - (#{byear} - #{bsite}) : #{name} (ABV: #{abv})
 """)
+      send_message("#{desc}...")
       puts "#{name} - #{abv}"
     else
       send_message("No beers found")
