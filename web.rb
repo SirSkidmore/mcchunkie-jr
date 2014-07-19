@@ -18,6 +18,10 @@ post '/' do
     salute(:right)
   elsif msg["text"].start_with?("!weather") && msg["name"] != "McChunkie"
     weather_report("Auburn, IN")
+  elsif msg["text"].match(/^\!beer/) && msg["name" != "McChunkie"]
+    # this could be better
+    beer = msg["text"].split[1..-1].join(" ")
+    brewdb(beer)
   end
 end
 
@@ -53,5 +57,32 @@ def weather_report(location)
     temp = forecast['temperature_string']
 
     send_message("The current conditions in #{location} are #{conditions} with a temperature of #{temp}.")
+  end
+end
+
+def brewdb(beer)
+  parsed_beer = beer.gsub(' ', '%20')
+  uri_string = "http://api.brewerydb.com/v2/search?q=#{parsed_beer}&type=beer&withBreweries=Y&key=38f1f0ddcac71318d250f675ca2166fd"
+  
+  open(uri_string) do |f|
+    json_string = f.read
+    parsed_json = JSON.parse(json_string)
+    if parsed_json["status"] == "success"
+      beer_res = parsed_json["data"][0]
+      if beer_res["breweries"]
+        brewery = beer_res["breweries"][0]
+        bname = brewery["name"]
+        byear = brewery["established"]
+        bsite = brewery["website"]
+      end
+      name = beer_res["name"]
+      abv = beer_res["abv"]
+      desc = beer_res["description"]
+      send_message("""
+#{bname} - (#{byear} - #{bsite}) : #{name} (ABV: #{abv})  - #{desc}
+""")
+    else
+      send_message("No beers found")
+    end
   end
 end
