@@ -22,6 +22,7 @@ post '/' do
     # this could be better
     beer = msg["text"].split[1..-1].join(" ")
     brewdb(beer)
+    put "beer command received..."
   end
 end
 
