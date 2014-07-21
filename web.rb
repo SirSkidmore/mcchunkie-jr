@@ -3,6 +3,8 @@ require 'json'
 require 'net/http'
 require 'open-uri'
 
+require_relative 'markov.rb'
+
 set :server, "thin"
 
 get '/' do
@@ -57,8 +59,11 @@ def weather_report(location)
     location = forecast['display_location']['full']
     conditions = forecast['weather']
     temp = forecast['temperature_string']
+    url = forecast['forecast_url']
 
-    send_message("The current conditions in #{location} are #{conditions} with a temperature of #{temp}.")
+    send_message("""
+The current conditions in #{location} are #{conditions} with a temperature of #{temp}. For more information, visit #{url}
+""")
   end
 end
 
