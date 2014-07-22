@@ -1,6 +1,6 @@
 class WeatherPlugin < Plugin
   def self.weather_report(location)
-    open('http://api.wunderground.com/api/3364b700f9c31c96/conditions/q/IN/Auburn.json') do |f|
+    open("http://api.wunderground.com/api/#{ENV['WEATHER_KEY']}/conditions/q/IN/Auburn.json") do |f|
       json_string = f.read
       parsed_json = JSON.parse(json_string)
       forecast = parsed_json['current_observation']

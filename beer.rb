@@ -2,7 +2,7 @@ class BeerPlugin < Plugin
     
   def self.brewdb(beer)
     parsed_beer = beer.gsub(' ', '%20')
-    uri_string = "http://api.brewerydb.com/v2/search?q=#{parsed_beer}&type=beer&withBreweries=Y&key=38f1f0ddcac71318d250f675ca2166fd"
+    uri_string = "http://api.brewerydb.com/v2/search?q=#{parsed_beer}&type=beer&withBreweries=Y&key=#{ENV['BREWERY_DB']}"
     
     open(uri_string) do |f|
       json_string = f.read

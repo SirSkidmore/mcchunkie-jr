@@ -3,7 +3,7 @@ class Plugin
     uri = URI('https://api.groupme.com/v3/bots/post')
     response_msg = {
       "text" => msg,
-      "bot_id" => "b9b75ee8449c637a0097b652f0"
+      "bot_id" => ENV['BOT_ID']
     }.to_json
     
     gm_http = Net::HTTP.new(uri.host, uri.port)

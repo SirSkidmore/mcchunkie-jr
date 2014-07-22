@@ -2,6 +2,7 @@ require 'sinatra'
 require 'json'
 require 'net/http'
 require 'open-uri'
+require 'dotenv'
 
 require_relative 'plugin'
 require_relative 'beer'
@@ -10,6 +11,7 @@ require_relative 'markov'
 require_relative 'weather'
 
 set :server, "thin"
+Dotenv.load
 
 get '/' do
   "A GroupMe bot!"
