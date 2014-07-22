@@ -42,8 +42,12 @@ def command(msg, name)
   when /^!wiki/
     search = msg.split[1..-1].join(" ")
     WikiPlugin.wiki(search)
-  when /mcchunkie/i && /hey|hi/i
+  when /mcchunkie/i && /hey|hi|yo|sup/i
     PleasentryPlugin.greetings(name)
+  when /mcchunkie/i && /bye|cya|bai/i
+    PleasentryPlugin.goodbye(name)
+  when /mcchunkie/i && /thanks|thnx|thank you|thanx/i
+    PleasentryPlugin.thanks(name)
   end
 end
 
