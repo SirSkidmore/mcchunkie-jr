@@ -26,27 +26,27 @@ post '/' do
 end
 
 def command(msg, name)
-  case msg
-  when /\\o|o\//
+  case 
+  when msg =~ /\\o|o\//
     puts msg
     Hi5Plugin.high_five(msg)
-  when /^!weather/
+  when msg =~ /^!weather/
     loc = msg.downcase.gsub(/[^a-z0-9\s]/, '').split[1..-1]
     WeatherPlugin.weather_report(loc)
-  when /^\!beer/
+  when msg =~ /^\!beer/
     beer = msg.split[1..-1].join(" ")
     BeerPlugin.brewdb(beer)
-  when /^!sherlock/
+  when msg =~ /^!sherlock/
     word = msg.split[1] || nil
     MarkovGen::MarkovPlugin.sherlock(word)
-  when /^!wiki/
+  when msg =~ /^!wiki/
     search = msg.split[1..-1].join(" ")
     WikiPlugin.wiki(search)
-  when /mcchunkie/i && /hey|hi|yo|sup/i
+  when msg =~ /mcchunkie/i && msg =~ /hey|hi|yo|sup/i
     PleasentryPlugin.greetings(name)
-  when /mcchunkie/i && /bye|cya|bai/i
+  when msg =~ /mcchunkie/i && msg =~ /bye|cya|bai/i
     PleasentryPlugin.goodbye(name)
-  when /mcchunkie/i && /thanks|thnx|thank you|thanx/i
+  when msg =~ /mcchunkie/i && msg =~ /thanks|thnx|thank you|thanx/i
     PleasentryPlugin.thanks(name)
   end
 end
