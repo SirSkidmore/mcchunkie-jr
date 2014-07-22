@@ -4,15 +4,22 @@ class MarkovGen
     @words = Hash.new
     word_list = @file.split
     word_list.each_with_index do |word, index|
-      next_word = word_list[index + 1]
-      @words[word] = Hash.new(0) if !@words[word]
-      @words[word][next_word] += 1
+      @words[word] = Array.new if !@words[word]
+      @words[word].push(word_list[index + 1])
     end
   end
 
   def get_word(word)
     poss = @words[word]
-    sum = poss.inject(0) {|sum,kv| sum+= kv[1]}
-    random = rand(sum)+1
+    random = rand(poss.length)
+    return poss[random]
+  end
+
+  def random_word
+    random = rand(@words.keys.length)
+    return @words[random]
+  end
+
+  def get_sentence
   end
 end
