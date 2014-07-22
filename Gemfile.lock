@@ -2,9 +2,6 @@ GEM
   remote: https://rubygems.org/
   specs:
     daemons (1.1.9)
-    dotenv (0.11.1)
-      dotenv-deployment (~> 0.0.2)
-    dotenv-deployment (0.0.2)
     eventmachine (1.0.3)
     rack (1.5.2)
     rack-protection (1.5.3)
@@ -23,6 +20,5 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  dotenv
   sinatra (= 1.4.5)
   thin (= 1.5.1)
