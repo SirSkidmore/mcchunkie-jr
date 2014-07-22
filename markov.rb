@@ -17,9 +17,17 @@ class MarkovGen
 
   def random_word
     random = rand(@words.keys.length)
-    return @words[random]
+    word = @words.keys[random]
+    return word
   end
 
-  def get_sentence
+  def get_sentence(word)
+    sentence = ""
+    until sentence.match(/\s[a-z]*\./i)
+      sentence << word << " "
+      word = get_word(word)
+    end
+
+    return sentence
   end
 end

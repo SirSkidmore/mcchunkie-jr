@@ -22,9 +22,12 @@ post '/' do
     weather_report("Auburn, IN")
   elsif msg["text"].match(/^\!beer/) && msg["name"] != "McChunkie"
     puts "looking for beer..."
-    # this could be better
+    # this could be probably better
     beer = msg["text"].split[1..-1].join(" ")
     brewdb(beer)
+  elsif msg["text"].match(/^!sherlock/) && msg["name"] != "McChunkie"
+    word = msg["text"].split[1] || nil
+    sherlock(word)
   end
 end
 
@@ -94,4 +97,15 @@ def brewdb(beer)
       send_message("No beers found")
     end
   end
+end
+
+def sherlock(word)
+  sherlock_chain = MarkovGen.new("./sherlock.txt")
+  if word
+    resp = sherlock_chain.get_sentence(word)
+  else
+    resp = sherlock_chain.get_sentence(sherlock_chain.random_word)
+  end
+
+  send_message(resp)
 end
