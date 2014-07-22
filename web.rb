@@ -8,6 +8,7 @@ require_relative 'beer'
 require_relative 'high_five'
 require_relative 'markov'
 require_relative 'weather'
+require_relative 'wiki'
 
 set :server, "thin"
 
@@ -36,6 +37,9 @@ def command(msg)
   when /^!sherlock/
     word = msg.split[1] || nil
     MarkovGen::MarkovPlugin.sherlock(word)
+  when /^!wiki/
+    search = msg.split[1..-1].join(" ")
+    WikiPlugin.wiki(search)
   end
 end
 
