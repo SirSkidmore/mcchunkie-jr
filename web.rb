@@ -35,7 +35,7 @@ def send_message(msg)
   uri = URI('https://api.groupme.com/v3/bots/post')
   response_msg = {
     "text" => msg,
-    "bot_id" => "b9b75ee8449c637a0097b652f0"
+    "bot_id" => "e8298ce556883d910629969317"
   }.to_json
   
   gm_http = Net::HTTP.new(uri.host, uri.port)
