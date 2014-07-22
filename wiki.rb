@@ -6,9 +6,11 @@ class WikiPlugin < Plugin
     resp_length = 447 - "http://en.wikipedia.org/wiki/#{search_slug} :: ".length
       
     wiki_url = ["http://en.wikipedia.org/w/api.php?action=query",
-                "&prop=extracts&exchars=#{resp_length}",
+                "&prop=extracts",
+                "&exchars=#{resp_length}",
                 "&format=json",
                 "&exsectionformat=plain",
+                "&redirects=",
                 "&titles=#{search_slug}"].join("")
     user_agent = ['McChunkie-Jr-GroupMe/1.0 ',
                   '(github.com/SirSkidmore/mcchunkie-jr); ',
@@ -21,7 +23,7 @@ class WikiPlugin < Plugin
         send_message("Wikipeda entry not found")
       else
         page_id = query.keys.first
-        desc = query[page_id]["extract"].gsub(/<\/?[a-z0-9]*>/i, '')
+        desc = query[page_id]["extract"].gsub(/<\/?[^>.]*>/i, '')
        send_message ("""
 http://en.wikipedia.org/wiki/#{search_slug} :: #{desc}...
 """)
