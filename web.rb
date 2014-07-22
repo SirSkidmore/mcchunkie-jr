@@ -28,7 +28,8 @@ def command(msg)
     puts msg
     Hi5Plugin.high_five(msg)
   when /^!weather/
-    WeatherPlugin.weather_report("Auburn, IN")
+    loc = msg.downcase.gsub(/[^a-z0-9\s]/, '').split[1..-1]
+    WeatherPlugin.weather_report(loc)
   when /^\!beer/
     beer = msg.split[1..-1].join(" ")
     BeerPlugin.brewdb(beer)
