@@ -11,7 +11,7 @@ require_relative 'markov'
 require_relative 'weather'
 
 set :server, "thin"
-Dotenv.load
+Dotenv.load unless ENV['PRODUCTION']
 
 get '/' do
   "A GroupMe bot!"
