@@ -7,6 +7,7 @@ require_relative 'plugin'
 require_relative 'beer'
 require_relative 'high_five'
 require_relative 'markov'
+require_relative 'pleasent'
 require_relative 'weather'
 require_relative 'wiki'
 
@@ -19,11 +20,12 @@ end
 post '/' do
   json = JSON.parse(request.body.read)
   puts json
+  name = json["name"] # because sometimes we want this
   msg = json["text"]
-  command(msg) unless json["name"] == "McChunkie"
+  command(msg, name) unless name == "McChunkie"
 end
 
-def command(msg)
+def command(msg, name)
   case msg
   when /\\o|o\//
     puts msg
@@ -40,6 +42,8 @@ def command(msg)
   when /^!wiki/
     search = msg.split[1..-1].join(" ")
     WikiPlugin.wiki(search)
+  when /mcchunkie/i && /hey|hi/i
+    PleasentryPlugin.greetings(name)
   end
 end
 
