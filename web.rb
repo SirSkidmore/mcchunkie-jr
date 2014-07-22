@@ -107,5 +107,5 @@ def sherlock(word)
     resp = sherlock_chain.get_sentence(sherlock_chain.random_word)
   end
 
-  send_message(resp)
+  send_message(resp.capitalize)
 end
