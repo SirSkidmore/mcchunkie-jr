@@ -10,12 +10,15 @@ over the course of an afternoon, and as such, may have unexplored bugs.
 
 Currently, McChunkie Jr has only a few commands:
 
-* !weather - limited to just one location (because I keep forgetting to fix it)
-* !beer `foo` - uses the fantastic [brewerydb](http://brewerydb.com) to look up the
-beer `foo`
+* !weather `location` - looks up the weather for provided locations
+* !beer `foo` - uses the fantastic [brewerydb](http://brewerydb.com) to look up
+  the beer `foo`
 * o/ (and \o) - because sometimes, high fives just make you feel better
 * !sherlock - a moderately bad Markov chain working with Arthur Conan Doyle's
-*The Adventures of Sherlock Holmes*.
+  *The Adventures of Sherlock Holmes*.
+* !wiki `article` - searches Wikipedia for article title. Will follow redirects.
+* McChunkie will also respond to various pleasentries like hello, goodbye, and
+  thanks.
 
 
 ## Disclaimer:
@@ -25,7 +28,8 @@ while trying to waste just a little time. This will probably only be useful for
 me, and I don't particularly recommend using it. If you're really motivated,
 however, you will need API keys from: [GroupMe](https://dev.groupme.com/bots),
 [Wunderground](http://www.wunderground.com/weather/api/), and
-[BreweryDB](http://brewerydb.com/developers/).
+[BreweryDB](http://brewerydb.com/developers/). I also ask that you change the
+provided User-Agent in [wiki.rb](wiki.rb).
 
 Also, I don't particularly recommend running `git log` or looking at the history
 at all. Honestly, it's so bad that I feel bad looking through it. Now that
