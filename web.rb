@@ -8,6 +8,7 @@ require_relative 'beer'
 require_relative 'csi'
 require_relative 'high_five'
 require_relative 'markov'
+require_relative 'pew'
 require_relative 'pleasent'
 require_relative 'weather'
 require_relative 'wiki'
@@ -45,6 +46,8 @@ def command(msg, name)
     WikiPlugin.wiki(search)
   when msg =~ /csi/i
     CSIPlugin.yeah
+  when msg =~ /pew/i
+    PewPlugin.pew
   when msg =~ /mcchunkie/i && msg =~ /\b(hey|hi|yo|sup)\b/i
     PleasentryPlugin.greetings(name)
   when msg =~ /mcchunkie/i && msg =~ /\b(bye|cya|bai)\b/i
