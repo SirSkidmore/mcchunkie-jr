@@ -5,6 +5,7 @@ require 'open-uri'
 
 require_relative 'plugin'
 require_relative 'beer'
+require_relative 'csi'
 require_relative 'high_five'
 require_relative 'markov'
 require_relative 'pleasent'
@@ -42,6 +43,8 @@ def command(msg, name)
   when msg =~ /^!wiki/
     search = msg.split[1..-1].join(" ")
     WikiPlugin.wiki(search)
+  when msg =~ /csi/i
+    CSIPlugin.yeah
   when msg =~ /mcchunkie/i && msg =~ /\b(hey|hi|yo|sup)\b/i
     PleasentryPlugin.greetings(name)
   when msg =~ /mcchunkie/i && msg =~ /\b(bye|cya|bai)\b/i
