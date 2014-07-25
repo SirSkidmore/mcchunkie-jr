@@ -10,6 +10,7 @@ require_relative 'high_five'
 require_relative 'markov'
 require_relative 'pew'
 require_relative 'pleasent'
+require_relative 'ship_it'
 require_relative 'weather'
 require_relative 'wiki'
 
@@ -44,6 +45,8 @@ def command(msg, name)
   when msg =~ /^!wiki/
     search = msg.split[1..-1].join(" ")
     WikiPlugin.wiki(search)
+  when msg =~ /!ship\s?it/
+    ShipItPlugin.ship_it
   when msg =~ /csi/i
     CSIPlugin.yeah
   when msg =~ /pew/i
