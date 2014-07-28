@@ -10,6 +10,10 @@ class Plugin
     gm_http.use_ssl = true
     req = Net::HTTP::Post.new(uri.path, {'Content-Type' => 'application/json'})
     req.body = response_msg
+    
+    # Make McChunkie wait to avoid clients mixing up
+    # order of messages.
+    sleep(1)
     response = gm_http.request(req)
     puts response.message
   end
