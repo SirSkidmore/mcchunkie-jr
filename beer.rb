@@ -7,7 +7,7 @@ class BeerPlugin < Plugin
       brew_info = beer_result[0]
       beer_info = beer_result[1]
       self.send_message("""
-#{brew_info[0]} - (#{brew_info[1]} - #{brew_info[2]}) : #{beer_info[0]} (ABV: #{beer_info[1]})
+#{brew_info[0]} (#{brew_info[1]} - #{brew_info[2]}) : #{beer_info[0]} (ABV: #{beer_info[1]})
 """)
       self.send_message("#{beer_info[2]}...")
     else
