@@ -7,8 +7,7 @@ class WeatherPlugin < Plugin
     else
       loc_slug = "#{location[0]}"
     end
-    
-    puts loc_slug
+
     open("http://api.wunderground.com/api/#{ENV['WEATHER_KEY']}/conditions/q/#{loc_slug}.json") do |f|
       json_string = f.read
       parsed_json = JSON.parse(json_string)

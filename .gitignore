@@ -34,5 +34,4 @@ build/
 .rvmrc
 
 # ignore .env
-.env
-
+.env_keys
